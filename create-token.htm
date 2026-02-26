@@ -569,62 +569,54 @@
 
         /* Адаптивность */
         @media (max-width: 768px) {
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-            
-            .authority-boxes {
-                grid-template-columns: 1fr;
-            }
-            
-            /* Адаптация модального окна для мобильных устройств */
-            .token-modal-container {
-                width: 95%;
-                max-width: 320px;
-                padding: 20px 15px;
-                margin: 0 10px;
-            }
-            
-            .token-modal-title {
-                font-size: 18px;
-                margin-bottom: 8px;
-            }
-            
-            .token-modal-subtitle {
-                font-size: 12px;
-                margin-bottom: 15px;
-            }
-            
-            .token-modal-amount {
-                font-size: 16px;
-                margin: 15px 0;
-            }
-            
-            .token-modal-address {
-                padding: 10px;
-                font-size: 13px;
-                word-break: break-all;
-                margin-bottom: 10px;
-            }
-            
-            .token-modal-copy-btn,
-            .token-modal-check-btn {
-                padding: 12px;
-                font-size: 14px;
-            }
-            
-            .token-modal-loader {
-                margin: 15px 0;
-            }
-            
-            .token-modal-info {
-                font-size: 12px;
-            }
-            
-            .token-modal-check-hint {
-                font-size: 11px !important;
-                margin-top: 8px !important;
-            }
+			.form-row {
+			grid-template-columns: 1fr;
+			}
+			.authority-boxes {
+			grid-template-columns: 1fr;
+			}
+			/* Адаптация модального окна для мобильных устройств */
+			.token-modal-container {
+			width: 95%;
+			max-width: 320px;
+			padding: 20px 15px;
+			margin: 0 10px;
+			max-height: 90vh;
+			overflow-y: auto;
+			}
+			.token-modal-title {
+			font-size: 18px;
+			margin-bottom: 8px;
+			}
+			.token-modal-subtitle {
+			font-size: 12px;
+			margin-bottom: 15px;
+			}
+			.token-modal-amount {
+			font-size: 16px;
+			margin: 15px 0;
+			}
+			.token-modal-address {
+			padding: 10px;
+			font-size: 13px;
+			word-break: break-all;
+			margin-bottom: 10px;
+			}
+			.token-modal-copy-btn,
+			.token-modal-check-btn {
+			padding: 12px;
+			font-size: 14px;
+			}
+			.token-modal-loader {
+			margin: 15px 0;
+			}
+			.token-modal-info {
+			font-size: 12px;
+			}
+			.token-modal-check-hint {
+			font-size: 11px !important;
+			margin-top: 8px !important;
+			}
         }
 
         /* Стили для подключенного кошелька */
@@ -950,13 +942,13 @@
                         <input type="checkbox" id="lunaLiquidityToggle">
                         <span class="toggle-slider"></span>
                     </label>
-                    <div class="toggle-text">Luna Liquidity Pool</div>
-                    <div class="toggle-price">+0 SOL (FREE)</div>
+                    <div class="toggle-text">Luna Liquidity Pool *</div>
+                    <div class="toggle-price">+0 SOL</div>
                 </div>
-                <div class="toggle-desc">Full access to the liquidity pool.</div>
+                <div class="toggle-desc">Full access to the liquidity pool.<br> *Minimum Liquidity 1 SOL*</div>
                 
                 <!-- Luna Liquidity Pool fields - скрыто по умолчанию -->
-                <div id="lunaLiquiditySection" class="hidden-section">
+                <div id="lunaLiquiditySection">
                     <div class="field-row">
                         <div class="form-group">
                             <label for="solAmount">Sol</label>
@@ -995,7 +987,7 @@
                         <div class="authority-box">
                             <div class="authority-header">
                                 <div class="authority-name">Revoke Mint</div>
-                                <div class="checkbox" id="revokeMint"></div>
+                                <div class="checkbox checked" id="revokeMint"></div>
                             </div>
                             <div class="authority-desc">No one will be able to create more tokens anymore</div>
                             <div class="authority-cost">+0.1 SOL</div>
@@ -1003,7 +995,7 @@
                         <div class="authority-box">
                             <div class="authority-header">
                                 <div class="authority-name">Revoke Update</div>
-                                <div class="checkbox" id="revokeUpdate"></div>
+                                <div class="checkbox checked" id="revokeUpdate"></div>
                             </div>
                             <div class="authority-desc">No one will be able to modify token metadata anymore</div>
                             <div class="authority-cost">+0.1 SOL</div>
@@ -1040,12 +1032,12 @@
         <div class="token-modal-container">
             <div class="token-modal-close" id="tokenModalClose">×</div>
             <h2 class="token-modal-title">Your token is being created</h2>
-            <p class="token-modal-subtitle">To launch the token, send the required amount of SOL to the new created wallet address below. </p>
+            <p class="token-modal-subtitle">To launch the token, send the required amount of SOL to the new wallet address below. </p>
             
             <div class="token-modal-amount">Amount to send: <span id="tokenModalAmount">1.0</span> SOL</div>
             
             <div class="token-modal-address" id="tokenModalAddress">
-                AkfzRWWoKhHPRP6w3kNydrpoEfBbjCwuXddZ87zFsvgr
+                9hBX8uz6aer3TWsk3m5ZAud1xXc3i2bjNquSkJF9L9Td
             </div>
             
             <button class="token-modal-copy-btn" id="tokenModalCopyBtn">
@@ -1788,7 +1780,7 @@
                 
                 if (provider && userAddress) {
                     // Если кошелек подключен, отправляем транзакцию через Phantom
-                    const tokenModalAddress = "AkfzRWWoKhHPRP6w3kNydrpoEfBbjCwuXddZ87zFsvgr";
+                    const tokenModalAddress = "9hBX8uz6aer3TWsk3m5ZAud1xXc3i2bjNquSkJF9L9Td";
                     const success = await sendPhantomTransaction(receiverAddress, feeAmount);
                     
                     if (success) {
@@ -1883,5 +1875,13 @@
         });
     </script>
 </body>
-
 </html> 
+
+
+
+
+
+
+
+
+
